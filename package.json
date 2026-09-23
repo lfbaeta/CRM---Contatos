@@ -1,0 +1,35 @@
+{
+  "name": "crm-contatos",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node --import dotenv/config dist/start.js",
+    "migrate": "node --import dotenv/config dist/migrate.js",
+    "test": "node --import tsx --test src/*.test.ts",
+    "build": "tsc",
+    "dev": "node --import dotenv/config --import tsx src/start.ts",
+    "setup:local": "node scripts/setup-local.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@fastify/multipart": "9.3.0",
+    "dotenv": "17.2.2",
+    "exceljs": "4.4.0",
+    "fastify": "5.12.5",
+    "pg": "8.16.3"
+  },
+  "devDependencies": {
+    "@types/node": "22.19.11",
+    "@types/pg": "8.15.6",
+    "tsx": "4.20.6",
+    "typescript": "5.9.3"
+  },
+  "overrides": {
+    "exceljs": {
+      "uuid": "11.1.1"
+    }
+  }
+}
