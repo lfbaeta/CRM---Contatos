@@ -76,15 +76,18 @@ async function loadContacts() {
   if (!authToken()) return;
   const version = ++requestVersion;
   const params = new URLSearchParams({ q: $("search").value, status: $("status-filter").value,
-    location: $("location").value, category: $("category-filter").value, sort: $("sort").value, page: String(page), pageSize: "50" });
+    location: $("location").value, category: $("category-filter").value, sort: $("sort").value, page: String(page), pageSize: $("category-filter").value ? "2000" : "50" });
   try {
     const data = await api(`/api/contacts?${params}`);
     if (version !== requestVersion || !authToken()) return;
     const pages = Math.max(1, Math.ceil(data.total / data.pageSize));
     if (page > pages) { page = pages; return loadContacts(); }
     window.crmSummary = data.summary; renderContacts(data.contacts);
-    $("table-note").textContent = `${data.total} resultado(s) · ${data.contacts.length} nesta página`;
+    $("table-note").textContent = $("category-filter").value && pages === 1
+      ? `Exibindo todos os ${data.total} comércios da categoria: ${$("category-filter").selectedOptions[0].textContent}.`
+      : `${data.total} resultado(s) · ${data.contacts.length} nesta página`;
     $("page-label").textContent = `Página ${page} de ${pages}`;
+    $("pagination").classList.toggle("hidden", pages <= 1);
     $("prev-page").disabled = page <= 1; $("next-page").disabled = page >= pages;
   } catch (error) { if (version === requestVersion) showMessage(error.message); }
 }
@@ -120,7 +123,7 @@ function disconnect() {
   $("contact-rows").innerHTML = '<tr><td colspan="6" class="empty">Configure seu acesso para carregar os contatos.</td></tr>';
   $("category-filter").replaceChildren(new Option('Todas',''));
   for (const id of ['stat-total','stat-interessado','stat-sem-resposta','stat-convertido']) $(id).textContent = '—';
-  $("table-note").textContent = ''; $("prev-page").disabled = true; $("next-page").disabled = true;
+  $("table-note").textContent = ''; $("pagination").classList.add('hidden'); $("prev-page").disabled = true; $("next-page").disabled = true;
 }
 
 function renderPreview(data) {
