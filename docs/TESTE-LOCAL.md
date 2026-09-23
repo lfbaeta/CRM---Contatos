@@ -46,7 +46,7 @@ Caracteres especiais na senha precisam de codificação de URL (por exemplo, `@`
 - Buscar sem acentos (ex.: `acai` encontra `Açaí`) e por telefone sem parênteses/hífens.
 - Combinar cidade/bairro/rua do endereço, categoria e status. Usar Limpar filtros.
 - Alterar cada um dos cinco status, salvar observação e procurar um trecho dela na busca.
-- Filtrar uma categoria: todos os resultados da categoria aparecem na mesma tela (até 2.000); os botões de página somem quando não há outra página. Sem categoria, a busca continua dividida em páginas de 50.
+- Filtrar uma categoria: todos os resultados da categoria aparecem na mesma tela (até 2.000); os botões de página somem quando não há outra página. Sem categoria, escolha 10, 25, 50 ou 100 itens por página; use Anterior/Próxima para percorrer todos os resultados.
 - Abrir WhatsApp e mapa: são atalhos; não enviam mensagens automaticamente. O mapa faz uma pesquisa por nome e endereço.
 - Reiniciar o servidor e confirmar que os registros persistem.
 

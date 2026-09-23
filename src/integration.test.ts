@@ -44,6 +44,9 @@ test('PostgreSQL: migração, XLSX, duplicados, busca, status, observações e p
     assert.equal((await app.inject({url:'/api/filters',headers})).json().categories[0],'Lanches');
     const more = Array.from({length:52}, (_,i) => ({name:`Loja ${String(i).padStart(2,'0')}`,phone_original:`1398888${String(i).padStart(4,'0')}`}));
     assert.equal((await commit(more)).json().imported,52);
+    assert.equal((await list('page=1&pageSize=10')).contacts.length,10);
+    assert.equal((await list('page=2&pageSize=10')).contacts.length,10);
+    assert.equal((await list('page=6&pageSize=10')).contacts.length,3);
     assert.equal((await list('page=1&pageSize=50')).contacts.length,50);
     assert.equal((await list('page=2&pageSize=50')).contacts.length,3);
     assert.equal((await list('q=%25')).total,0);

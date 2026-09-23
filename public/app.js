@@ -76,7 +76,7 @@ async function loadContacts() {
   if (!authToken()) return;
   const version = ++requestVersion;
   const params = new URLSearchParams({ q: $("search").value, status: $("status-filter").value,
-    location: $("location").value, category: $("category-filter").value, sort: $("sort").value, page: String(page), pageSize: $("category-filter").value ? "2000" : "50" });
+    location: $("location").value, category: $("category-filter").value, sort: $("sort").value, page: String(page), pageSize: $("category-filter").value ? "2000" : $("page-size").value });
   try {
     const data = await api(`/api/contacts?${params}`);
     if (version !== requestVersion || !authToken()) return;
@@ -168,7 +168,7 @@ $("logout-button").addEventListener('click', disconnect);
 $("file").addEventListener('change', () => { pendingContacts = []; $("preview").classList.add('hidden'); $("file-name").textContent = $("file").files[0]?.name ?? 'Planilha no formato de empresas exportado'; });
 $("preview-button").addEventListener('click', previewFile);
 $("refresh-button").addEventListener('click', loadContacts);
-for (const id of ['status-filter','category-filter','sort']) $(id).addEventListener('change', () => { page = 1; loadContacts(); });
+for (const id of ['status-filter','category-filter','sort','page-size']) $(id).addEventListener('change', () => { page = 1; loadContacts(); });
 let searchTimer;
 for (const id of ['search','location']) $(id).addEventListener('input', () => { clearTimeout(searchTimer); requestVersion++; page = 1; searchTimer = setTimeout(loadContacts, 250); });
 $("clear-filters").addEventListener('click', () => { clearTimeout(searchTimer); for (const id of ['search','location','category-filter']) $(id).value = ''; $("status-filter").value = 'todos'; $("sort").value = 'recent'; page = 1; loadContacts(); });

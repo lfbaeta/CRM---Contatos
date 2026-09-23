@@ -11,7 +11,7 @@ export function buildSearch(query: Record<string, unknown>) {
   const status = get('status') || 'todos';
   if (status !== 'todos' && !CONTACT_STATUSES.includes(status as ContactStatus)) throw new Error('Status inválido.');
   const page = Number(get('page') || 1), pageSize = Number(get('pageSize') || 50);
-  if (!Number.isSafeInteger(page) || page < 1 || page > 1000000 || ![25, 50, 100, 2000].includes(pageSize)) throw new Error('Página inválida.');
+  if (!Number.isSafeInteger(page) || page < 1 || page > 1000000 || ![10, 25, 50, 100, 2000].includes(pageSize)) throw new Error('Página inválida.');
   const params: unknown[] = [], clauses: string[] = [];
   const bind = (value: unknown) => { params.push(value); return `$${params.length}`; };
   if (status !== 'todos') clauses.push(`contact_status = ${bind(status)}`);

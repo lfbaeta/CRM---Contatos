@@ -17,6 +17,7 @@ test('busca parametrizada, acentos, telefone e filtros combinados', () => {
   assert.deepEqual(result.params, ['interessado','%acai%','%pariquera-acu%','Lanches']);
   assert.equal(result.page,2);
   assert.equal(buildSearch({category:'Lanches',pageSize:'2000'}).pageSize,2000);
+  assert.equal(buildSearch({location:'Jacupiranga',pageSize:'10'}).pageSize,10);
   assert.throws(() => buildSearch({pageSize:'2001'}));
   assert.ok(buildSearch({q:'(13) 99999-1234'}).params.includes('%13999991234%'));
   assert.ok(!buildSearch({q:"'; DROP TABLE contacts; --"}).where.includes('DROP'));
