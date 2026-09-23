@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.env
+*.xlsx
+*.xls
+*.csv
+npm-debug.log*

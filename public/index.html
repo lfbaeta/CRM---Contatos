@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f8fafc" />
+    <title>CRM - Contatos</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div><span class="eyebrow">RELACIONAMENTO COMERCIAL</span><h1>CRM <span>Contatos</span></h1></div>
+        <button class="button button-light" id="auth-button" type="button">Configurar acesso</button>
+      </header>
+
+      <section class="hero">
+        <div><h2>Organize seus contatos.</h2><p>Importe a planilha de empresas, acompanhe cada contato e atualize o status em poucos cliques.</p></div>
+        <div class="hero-mark" aria-hidden="true">C</div>
+      </section>
+
+      <section class="panel import-panel">
+        <div class="section-heading"><div><span class="eyebrow">IMPORTAÇÃO</span><h2>Adicionar contatos da planilha</h2></div><a class="text-link" href="#contatos">Ver contatos ↓</a></div>
+        <div class="upload-row">
+          <label class="file-picker" for="file"><span class="file-icon">↑</span><span><strong>Escolha um arquivo .xlsx</strong><small id="file-name">Planilha no formato de empresas exportado</small></span></label>
+          <input id="file" type="file" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
+          <button class="button button-primary" id="preview-button" type="button">Conferir planilha</button>
+        </div>
+        <div id="preview" class="preview hidden"></div>
+      </section>
+
+      <section class="stats" aria-label="Resumo dos contatos">
+        <article class="stat-card"><span>Total de contatos</span><strong id="stat-total">—</strong></article>
+        <article class="stat-card"><span>Interessados</span><strong id="stat-interessado">—</strong></article>
+        <article class="stat-card"><span>Sem resposta</span><strong id="stat-sem-resposta">—</strong></article>
+        <article class="stat-card"><span>Convertidos</span><strong id="stat-convertido">—</strong></article>
+      </section>
+
+      <section class="panel contacts-panel" id="contatos">
+        <div class="section-heading"><div><span class="eyebrow">SUA BASE</span><h2>Contatos</h2></div><button class="button button-light" id="refresh-button" type="button">Atualizar lista</button></div>
+        <div class="filters"><label class="search"><span>⌕</span><input id="search" type="search" placeholder="Buscar por nome, telefone ou endereço" /></label><label class="status-filter"><span>Status</span><select id="status-filter"><option value="todos">Todos</option><option value="novo">Novo</option><option value="interessado">Interessado</option><option value="nao_respondeu">Não respondeu</option><option value="sem_interesse">Sem interesse</option><option value="convertido">Convertido</option></select></label></div>
+        <div id="message" class="message hidden" role="status"></div>
+        <div class="table-wrap"><table><thead><tr><th>Empresa / contato</th><th>Telefone</th><th>Localização</th><th>Categoria</th><th>Status</th></tr></thead><tbody id="contact-rows"><tr><td colspan="5" class="empty">Configure seu acesso para carregar os contatos.</td></tr></tbody></table></div>
+        <p class="table-note" id="table-note"></p>
+      </section>
+      <footer>CRM Contatos · seus dados ficam no PostgreSQL configurado para este sistema.</footer>
+    </main>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
