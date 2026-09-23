@@ -11,7 +11,7 @@
     <main class="shell">
       <header class="topbar">
         <div><span class="eyebrow">RELACIONAMENTO COMERCIAL</span><h1>CRM <span>Contatos</span></h1></div>
-        <button class="button button-light" id="auth-button" type="button">Configurar acesso</button>
+        <div><button class="button button-light" id="auth-button" type="button">Configurar acesso</button> <button class="button button-light hidden" id="logout-button" type="button">Sair</button></div>
       </header>
 
       <section class="hero">
@@ -38,13 +38,22 @@
 
       <section class="panel contacts-panel" id="contatos">
         <div class="section-heading"><div><span class="eyebrow">SUA BASE</span><h2>Contatos</h2></div><button class="button button-light" id="refresh-button" type="button">Atualizar lista</button></div>
-        <div class="filters"><label class="search"><span>⌕</span><input id="search" type="search" placeholder="Buscar por nome, telefone ou endereço" /></label><label class="status-filter"><span>Status</span><select id="status-filter"><option value="todos">Todos</option><option value="novo">Novo</option><option value="interessado">Interessado</option><option value="nao_respondeu">Não respondeu</option><option value="sem_interesse">Sem interesse</option><option value="convertido">Convertido</option></select></label></div>
+        <div class="filters"><label class="search"><span>⌕</span><input id="search" type="search" placeholder="Nome, telefone, e-mail ou observação" /></label><label class="status-filter"><span>Status</span><select id="status-filter"><option value="todos">Todos</option><option value="novo">Novo</option><option value="interessado">Interessado</option><option value="nao_respondeu">Não respondeu</option><option value="sem_interesse">Sem interesse</option><option value="convertido">Convertido</option></select></label></div>
+        <div class="filters advanced-filters">
+          <label>Localização<input id="location" type="search" maxlength="160" placeholder="Cidade, bairro ou rua do endereço" /></label>
+          <label>Categoria<select id="category-filter"><option value="">Todas</option></select></label>
+          <label>Ordenar<select id="sort"><option value="recent">Importados recentemente</option><option value="name">Nome A–Z</option><option value="updated">Última atualização</option><option value="rating">Maior avaliação</option></select></label>
+          <button class="button button-light" id="clear-filters" type="button">Limpar filtros</button>
+        </div>
+        <p class="table-note">Localização pesquisa o endereço da planilha. Os cartões acima mostram a base completa.</p>
         <div id="message" class="message hidden" role="status"></div>
-        <div class="table-wrap"><table><thead><tr><th>Empresa / contato</th><th>Telefone</th><th>Localização</th><th>Categoria</th><th>Status</th></tr></thead><tbody id="contact-rows"><tr><td colspan="5" class="empty">Configure seu acesso para carregar os contatos.</td></tr></tbody></table></div>
-        <p class="table-note" id="table-note"></p>
+        <div class="table-wrap"><table><thead><tr><th>Empresa / contato</th><th>Telefone</th><th>Localização</th><th>Categoria</th><th>Status</th><th>Ações</th></tr></thead><tbody id="contact-rows"><tr><td colspan="6" class="empty">Configure seu acesso para carregar os contatos.</td></tr></tbody></table></div>
+        <div class="pagination"><p class="table-note" id="table-note" aria-live="polite"></p><div><button class="button button-light" id="prev-page" type="button">Anterior</button><span id="page-label">Página 1</span><button class="button button-light" id="next-page" type="button">Próxima</button></div></div>
       </section>
       <footer>CRM Contatos · seus dados ficam no PostgreSQL configurado para este sistema.</footer>
     </main>
+    <dialog id="notes-dialog"><form id="notes-form"><h2 id="notes-title">Observações</h2><label for="notes-text">Anote o histórico da conversa e o próximo passo</label><textarea id="notes-text" maxlength="5000" rows="8"></textarea><p id="notes-error" role="alert"></p><div class="preview-actions"><button class="button button-light" type="button" id="notes-cancel">Cancelar</button><button class="button button-primary" id="notes-save">Salvar observação</button></div></form></dialog>
+    <dialog id="auth-dialog"><form id="auth-form"><h2>Acessar CRM</h2><label for="token-input">Token de acesso</label><input id="token-input" type="password" autocomplete="off" required /><p id="auth-error" role="alert"></p><div class="preview-actions"><button class="button button-light" type="button" id="auth-cancel">Cancelar</button><button class="button button-primary">Conectar</button></div></form></dialog>
     <script type="module" src="/app.js"></script>
   </body>
 </html>
